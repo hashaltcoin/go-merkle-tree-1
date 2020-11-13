@@ -64,7 +64,7 @@ func NewBranch(sumFunc func(bool, []byte) []byte, left Node, right Node) *Branch
 	}
 }
 
-func NewTree(providedSumFunc func([]byte) []byte, blocks [][]byte) *Tree {
+func NewTree(providedSumFunc func([]byte) []byte, blocks [][]byte) Node {
 	levels := int(math.Ceil(math.Log2(float64(len(blocks)+len(blocks)%2))) + 1)
 
 	sumFunc := func(isLeaf bool, xs []byte) []byte {
@@ -106,11 +106,7 @@ func NewTree(providedSumFunc func([]byte) []byte, blocks [][]byte) *Tree {
 		}
 	}
 
-	return &Tree{
-		checksumFunc: sumFunc,
-		rows:         rows,
-		root:         rows[len(rows)-1][0],
-	}
+	return rows[len(rows)-1][0]
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
